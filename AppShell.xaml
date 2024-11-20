@@ -1,0 +1,206 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="DMS.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:controls="clr-namespace:DMS.CustomControls"
+    xmlns:local="clr-namespace:DMS"
+    xmlns:resource="clr-namespace:DMS.Resources"
+    xmlns:views="clr-namespace:DMS.Views"
+    x:Name="thisPage"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.PresentationMode="Animated">
+    <Shell.Resources>
+        <ResourceDictionary>
+
+
+            <Style x:Key="BaseStyle" TargetType="Element">
+
+                <Setter Property="Shell.ForegroundColor" Value="{DynamicResource whiteColor}" />
+                <!--  Foreground is the menu icon color  -->
+                <Setter Property="Shell.TitleColor" Value="{DynamicResource whiteColor}" />
+                <Setter Property="Shell.DisabledColor" Value="{DynamicResource FrameBackColor}" />
+                <Setter Property="Shell.UnselectedColor" Value="{DynamicResource BlackColor}" />
+            </Style>
+            <Style BasedOn="{StaticResource BaseStyle}" TargetType="FlyoutItem" />
+
+            <Style Class="FlyoutItemLabelStyle" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource BlackColor}" />
+            </Style>
+            <!--<Style Class="FlyoutItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="BackgroundColor" Value="#EAF4FF"></Setter>
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource Secondary}" />
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="Blue"/>
+                                </VisualState.Setters>
+                            </VisualState>
+                            <VisualState x:Name="Selected">
+                                <VisualState.Setters>
+                                    <Setter Property="BackgroundColor" Value="{StaticResource SecondaryLight}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>-->
+
+            <!--<Style Class="MenuItemLayoutStyle" TargetType="Layout" ApplyToDerivedTypes="True">
+                <Setter Property="VisualStateManager.VisualStateGroups">
+                    <VisualStateGroupList>
+                        <VisualStateGroup x:Name="CommonStates">
+                            <VisualState x:Name="Normal">
+                                <VisualState.Setters>
+                                    <Setter TargetName="FlyoutItemLabel" Property="Label.TextColor" Value="{StaticResource SecondaryLight}" />
+                                </VisualState.Setters>
+                            </VisualState>
+                        </VisualStateGroup>
+                    </VisualStateGroupList>
+                </Setter>
+            </Style>-->
+        </ResourceDictionary>
+    </Shell.Resources>
+    <Shell.FlyoutHeaderTemplate>
+        <DataTemplate>
+            <Frame
+                BackgroundColor="Transparent"
+                BorderColor="Transparent"
+                CornerRadius="20">
+                <StackLayout Orientation="Horizontal">
+                    <Frame
+                        CornerRadius="{OnPlatform Android='100',
+                                                  iOS='40'}"
+                        HeightRequest="80"
+                        HorizontalOptions="Start"
+                        IsClippedToBounds="True"
+                        WidthRequest="80">
+                        <Image
+                            Aspect="AspectFill"
+                            HeightRequest="80"
+                            Source="{Binding ProfileImage}"
+                            WidthRequest="80" />
+                    </Frame>
+                    <StackLayout Margin="20,0,0,0" VerticalOptions="CenterAndExpand">
+                        <Label
+                            FontSize="11"
+                            HorizontalOptions="FillAndExpand"
+                            HorizontalTextAlignment="Start"
+                            LineBreakMode="WordWrap"
+                            Style="{StaticResource SmallListLabelHeading}"
+                            Text="{Binding UserName}"
+                            VerticalTextAlignment="Center" />
+                        <Label
+                            HorizontalOptions="StartAndExpand"
+                            HorizontalTextAlignment="Start"
+                            Style="{StaticResource ListLabelValue}"
+                            Text="{Binding UserEmail}"
+                            VerticalTextAlignment="Center" />
+                    </StackLayout>
+
+                </StackLayout>
+
+            </Frame>
+        </DataTemplate>
+    </Shell.FlyoutHeaderTemplate>
+    <Shell.FlyoutFooterTemplate>
+        <DataTemplate>
+            <Border Style="{StaticResource ShellFooterBorderContainer}">
+                <Grid ColumnDefinitions="*,Auto">
+                    <Label Style="{StaticResource SmallListLabelHeading}">
+                        <Label.FormattedText>
+                            <FormattedString>
+                                <FormattedString.Spans>
+                                    <Span
+                                        Style="{StaticResource SmallListLabelHeading}"
+                                        Text="App Version : "
+                                        TextColor="#fff" />
+                                    <Span
+                                        Style="{StaticResource SmallListLabelHeading}"
+                                        Text="{Binding AppVersion}"
+                                        TextColor="#fff" />
+                                </FormattedString.Spans>
+                            </FormattedString>
+                        </Label.FormattedText>
+                    </Label>
+                    <Label
+                        Grid.Column="1"
+                        FontSize="9"
+                        HorizontalTextAlignment="End"
+                        Style="{StaticResource SmallListLabelHeading}"
+                        TextColor="#fff"
+                        VerticalTextAlignment="Center" />
+                </Grid>
+                <Border.GestureRecognizers>
+                    <TapGestureRecognizer Command="{Binding emptycommand}" />
+                </Border.GestureRecognizers>
+            </Border>
+        </DataTemplate>
+    </Shell.FlyoutFooterTemplate>
+
+    <Shell.FlyoutContentTemplate>
+        <DataTemplate>
+            <StackLayout BackgroundColor="Transparent" VerticalOptions="FillAndExpand">
+                <Frame
+                    Margin="0,-20,0,0"
+                    BackgroundColor="{DynamicResource whiteColor}"
+                    BorderColor="Transparent"
+                    CornerRadius="20"
+                    VerticalOptions="FillAndExpand">
+                    <ListView
+                        x:Name="MenuItemsListView"
+                        HasUnevenRows="true"
+                        ItemsSource="{Binding MenuItems}"
+                        SeparatorVisibility="None">
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <ViewCell ClassId="{Binding Route}" Tapped="ViewCell_Tapped">
+                                    <StackLayout
+                                        x:Name="MenuBgLayout"
+                                        Padding="5,10"
+                                        HorizontalOptions="FillAndExpand"
+                                        Orientation="Horizontal">
+                                        <!--<Label FontFamily="{StaticResource FontAwesomeSolid}" FontSize="18"
+                                               VerticalOptions="CenterAndExpand" HorizontalOptions="Start"
+                                               Text="&#xf015;" TextColor="{DynamicResource MainColor}"></Label>-->
+                                        <Image
+                                            HeightRequest="25"
+                                            Source="{Binding Image}"
+                                            WidthRequest="25" />
+                                        <Label
+                                            Margin="8,0,0,0"
+                                            Style="{StaticResource SmallListLabelHeading}"
+                                            Text="{Binding Title}"
+                                            VerticalOptions="FillAndExpand"
+                                            VerticalTextAlignment="Center" />
+                                        <!--<StackLayout.GestureRecognizers>
+                                        <TapGestureRecognizer   Command="{Binding Source={x:Reference thisPage}, Path=BindingContext.NavigateCommand}"
+                                        CommandParameter="{Binding Id}"/>
+                                    </StackLayout.GestureRecognizers>-->
+                                    </StackLayout>
+
+                                </ViewCell>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Frame>
+
+            </StackLayout>
+        </DataTemplate>
+    </Shell.FlyoutContentTemplate>
+
+
+    <FlyoutItem FlyoutDisplayOptions="AsSingleItem">
+
+
+        <!--<ShellContent  Title=""  ContentTemplate="{DataTemplate views:DashboardPage}"   />-->
+        <ShellContent Title="" ContentTemplate="{DataTemplate views:Profilepage}" />
+
+
+    </FlyoutItem>
+
+    <!--  For Validation pop up  -->
+
+</Shell>

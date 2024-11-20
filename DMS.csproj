@@ -1,0 +1,251 @@
+<Project Sdk="Microsoft.NET.Sdk">
+<PropertyGroup Condition="$(TargetFramework.Contains('-android')) and '$(Configuration)' == 'Release'">
+    <AndroidKeyStore>True</AndroidKeyStore>
+    <AndroidSigningKeyStore>myapp.keystore</AndroidSigningKeyStore>
+    <AndroidSigningKeyAlias>key</AndroidSigningKeyAlias>
+    <AndroidSigningKeyPass>android</AndroidSigningKeyPass>
+    <AndroidSigningStorePass>android</AndroidSigningStorePass>
+</PropertyGroup>
+	<PropertyGroup>
+		<TargetFrameworks>net7.0-ios;net7.0-android33.0</TargetFrameworks>
+		
+		<!-- Uncomment to also build the tizen app. You will need to install tizen by following this: https://github.com/Samsung/Tizen.NET -->
+		<!-- <TargetFrameworks>$(TargetFrameworks);net6.0-tizen</TargetFrameworks> -->
+		<OutputType>Exe</OutputType>
+		<RootNamespace>DMS</RootNamespace>
+		<UseMaui>true</UseMaui>
+		<SingleProject>true</SingleProject>
+		<ImplicitUsings>enable</ImplicitUsings>
+
+		<!-- Display name -->
+		<ApplicationTitle>DMS</ApplicationTitle>
+
+		<!-- App Identifier -->
+		<ApplicationId>com.kansoft.dmsapp</ApplicationId>
+		<ApplicationIdGuid>2e0102ef-5ad3-4b61-8328-74e49e6aaf1a</ApplicationIdGuid>
+
+		<!-- Versions -->
+		<ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+		<ApplicationVersion>1</ApplicationVersion>
+
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'ios'">14.2</SupportedOSPlatformVersion>
+		
+		<SupportedOSPlatformVersion Condition="$([MSBuild]::GetTargetPlatformIdentifier('$(TargetFramework)')) == 'android'">22.0</SupportedOSPlatformVersion>
+		</PropertyGroup>
+
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
+	  <CreatePackage>false</CreatePackage>
+	  <ApplicationVersion>8</ApplicationVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-android33.0|AnyCPU'">
+	  <ApplicationVersion>8</ApplicationVersion>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-android33.0|AnyCPU'">
+	  <AndroidSigningKeyAlias>alias_name</AndroidSigningKeyAlias>
+	  <ApplicationVersion>8</ApplicationVersion>
+	  <AndroidPackageFormat>apk</AndroidPackageFormat>
+	  <RunAOTCompilation>True</RunAOTCompilation>
+	  <PublishTrimmed>True</PublishTrimmed>
+	</PropertyGroup>
+	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
+	  <ApplicationVersion>8</ApplicationVersion>
+	</PropertyGroup>
+	<ItemGroup>
+	  <MauiImage Remove="Resources\Images\menugenusicon.svg" />
+	</ItemGroup>
+	<ItemGroup>
+		<!-- App Icon -->
+		<MauiIcon Include="Resources\AppIcon\appicon.svg" Color="white" />
+		<MauiSplashScreen Include="Resources\Splash\splash.svg" Color="white" BaseSize="128,128" />
+		<!-- Splash Screen -->
+		<!--<Splas Include="Resources\Splash\splash.png"  />-->
+
+		<!-- Images -->
+		<MauiImage Include="Resources\Images\*" />
+		<MauiFont Include="Resources\Fonts\*" />
+
+		<!-- Raw Assets (also remove the "Resources\Raw" prefix) -->
+		<MauiAsset Include="Resources\Raw\**" LogicalName="%(RecursiveDir)%(Filename)%(Extension)" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Resources\Images\addbtn.png" />
+	  <None Remove="Resources\Images\addbtn.svg" />
+	  <None Remove="Resources\Images\backarrow.svg" />
+	  <None Remove="Resources\Images\deleteicon.png" />
+	  <None Remove="Resources\Images\editicon.png" />
+	  <None Remove="Resources\Images\ellipsea.svg" />
+	  <None Remove="Resources\Images\ellipseb.svg" />
+	  <None Remove="Resources\Images\ellipsec.svg" />
+	  <None Remove="Resources\Images\ellipsed.svg" />
+	  <None Remove="Resources\Images\ellipsee.svg" />
+	  <None Remove="Resources\Images\extendedwarranty.svg" />
+	  <None Remove="Resources\Images\menuicon.png" />
+	  <None Remove="Resources\Images\menuicon.svg" />
+	  <None Remove="Resources\Images\minus.png" />
+	  <None Remove="Resources\Images\minus1.png" />
+	  <None Remove="Resources\Images\plus1.png" />
+	  <None Remove="Resources\Images\whitesuccessright.svg" />
+	  <None Remove="Resources\Images\menugenusicon.svg" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <MauiXaml Update="CustomControls\CustomMenuBar.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="CustomControls\DummyList.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="CustomControls\NoDataFound.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\AdvanceCheque.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\BarCodeScannerPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CreateBrandActivitypage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CreateExdendedWarrantyViewPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ExtendedWarrantyViewPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Language.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LedgerViewPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LoaderPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\MenuPages.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\OtpLoginVerifyPageNew.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\OtpRegisterVerifyPageNew.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\OTPVerificationPageNew.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ProductRegistrationDetailPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\Profilepage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SalesHierarchyPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\SignupSuccessfullyViewPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ViewBrandActivityPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\CreateReferralViewPage.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	  <MauiXaml Update="Views\ViewReferralListPage.xaml">
+	    <SubType></SubType>
+	  </MauiXaml>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <PackageReference Include="Abp" Version="5.1.0" />
+	  <PackageReference Include="Abp.AutoMapper" Version="5.1.0" />
+	  <PackageReference Include="Acr.UserDialogs" Version="8.0.1" />
+	  <PackageReference Include="ICSharpCode.Decompiler" Version="7.2.1.6856" />
+	  <PackageReference Include="LiveChartsCore.SkiaSharpView.Maui" Version="2.0.0-beta.701" />
+	  <PackageReference Include="Microsoft.Maui.Controls.Maps" Version="7.0.52" />
+	  <PackageReference Include="Newtonsoft.Json" Version="13.0.2" />
+	  <PackageReference Include="Plugin.Firebase" Version="1.2.5" />
+	  <PackageReference Include="Plugin.Maui.Popup" Version="1.0.4" />
+	  <PackageReference Include="Razorpay" Version="3.0.2" />
+	  <PackageReference Include="ResXResourceReader.NetStandard" Version="1.1.0" />
+	  <PackageReference Include="Xam.Plugin.Media" Version="5.0.1" />
+	  <PackageReference Include="ZXing.Net.Maui" Version="0.1.0-preview.5" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<GoogleServicesJson Include="google-services.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Compile Update="Localization\Resources\LocalTranslation.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>LocalTranslation.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Resources\Resource.Designer.cs">
+	    <DesignTime>True</DesignTime>
+	    <AutoGen>True</AutoGen>
+	    <DependentUpon>Resource.resx</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\BarCodeScannerPage.xaml.cs">
+	    <DependentUpon>BarCodeScannerPage.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\OtpLoginVerifyPageNew.xaml.cs">
+	    <DependentUpon>OtpLoginVerifyPageNew.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\OtpRegisterVerifyPageNew.xaml.cs">
+	    <DependentUpon>OtpRegisterVerifyPageNew.xaml</DependentUpon>
+	  </Compile>
+	  <Compile Update="Views\OTPVerificationPageNew.xaml.cs">
+	    <DependentUpon>OTPVerificationPageNew.xaml</DependentUpon>
+	  </Compile>
+	</ItemGroup>
+	<ItemGroup>
+	  <EmbeddedResource Update="Localization\Resources\LocalTranslation.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>LocalTranslation.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	  <EmbeddedResource Update="Resources\Resource.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+	  <PackageReference Include="CommunityToolkit.Maui" Version="3.1.0">
+	  </PackageReference>
+	  <PackageReference Include="ImageCropper.Maui" Version="1.0.2">
+	  </PackageReference>
+	  <PackageReference Include="Mopups" Version="1.1.0">
+	  </PackageReference>
+	</ItemGroup>
+
+
+	<ItemGroup>
+	  <BundleResource Include="Resources\Images\menugenusicon.svg" />
+	  <BundleResource Include="Resources\Images\menugenusicon.svg" />
+	</ItemGroup>
+
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android33.0'">
+	  <PackageReference Include="Xamarin.GooglePlayServices.Auth">
+	    <Version>120.4.0.1</Version>
+	  </PackageReference>
+	</ItemGroup>
+
+	<ItemGroup Condition="'$(TargetFramework)' == 'net7.0-android'">
+        <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk7" Version="1.7.20.1" ExcludeAssets="build;buildTransitive" />
+        <PackageReference Include="Xamarin.Kotlin.StdLib.Jdk8" Version="1.7.20.1" ExcludeAssets="build;buildTransitive" />
+    </ItemGroup>
+	
+	<ProjectExtensions><VisualStudio><UserProperties XamarinHotReloadDebuggerTimeoutExceptionDMSHideInfoBar="True" /></VisualStudio></ProjectExtensions>
+
+</Project>

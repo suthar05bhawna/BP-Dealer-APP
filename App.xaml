@@ -1,0 +1,871 @@
+﻿<?xml version = "1.0" encoding = "UTF-8" ?>
+<Application xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:DMS"
+              xmlns:views="clr-namespace:DMS.Views"
+    xmlns:converters="clr-namespace:DMS.Converters;assembly=DMS"
+             x:Class="DMS.App">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries >
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+                <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+
+            <ResourceDictionary Source="Resources/Styles/Colors.xaml" />
+            <ResourceDictionary Source="Resources/Styles/Styles.xaml" />
+            <!--  CONVERTERS  -->
+            <converters:ResourceConverter x:Key="ResourceConverter" />
+            <converters:DatetimeConverter x:Key="DatetimeConverter" />
+            <converters:FloatToFixed x:Key="FloatToFixed" />
+            <converters:FloatToCultural x:Key="FloatToCultural" />  <!--added Tarun@Kansoft 26/03/2024 for formating amount values-->
+
+            <!--Colors-->
+            <Color x:Key="whiteColor">#FFFFFF</Color>
+            <Color x:Key="bgGrayColor">#DD000000</Color>
+            <Color  x:Key="mainColor">#0051AC</Color>
+            <Color x:Key="labelTextColor">#344054</Color>
+            <Color x:Key="PageTitleColor">#ffffff</Color>
+            <Color x:Key="entryBorderColor">#60ADADAD</Color>
+            <Color x:Key="GrayColor">#585858</Color>
+            <Color x:Key="LineColor">#D0D5DD</Color>
+            <Color x:Key="labelEntryValueTextColor">#344054</Color>
+            <Color x:Key="labelEntryHeadingTextColor">#344054</Color>
+
+            <Color x:Key="FrameBackColor">#ffffff</Color>
+            <Color x:Key="LoaderColor">#0051AC</Color>
+            <Color x:Key="Entrybackground">#FFFFFF</Color>
+            <Color x:Key="ListViewFooterColor">#f2f6f9</Color>
+            <Color x:Key="SecondaryheaderColor">#f2f6f9</Color>
+            <Color x:Key="AppBackgroundColor">#f9fafb</Color>
+            <Color x:Key="PopupBackgroundColor">#ffffff</Color>
+
+            <Color x:Key="SearchBoxborder">#11667085</Color>
+
+            <Color x:Key="TabBackgroundColor">#EAF4FF</Color>
+
+            <Color x:Key="IconColor"> #667085</Color>
+
+
+
+
+            <!--ColorsTobeAddedinAPI-->
+
+
+            <OnPlatform x:Key="FontRegular" x:TypeArguments="x:String">
+                <On Platform="Android" Value="OpenSans-Regular.ttf#OpenSans" />
+                <On Platform="iOS" Value="OpenSans-Regular" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontBold" x:TypeArguments="x:String">
+                <On Platform="Android" Value="OpenSans-Bold.ttf#OpenSans" />
+                <On Platform="iOS" Value="OpenSans-Bold" />
+            </OnPlatform>
+            <OnPlatform x:Key="FontSemiBold" x:TypeArguments="x:String">
+                <On Platform="Android" Value="OpenSans-Semibold.ttf#OpenSans" />
+                <On Platform="iOS" Value="OpenSans-Semibold" />
+            </OnPlatform>
+
+
+
+            <!--<x:OnPlatform
+                x:Key="FontSize10"
+                x:TypeArguments="x:Double"
+                Android="10"
+                iOS="10" />
+            <x:OnPlatform
+                x:Key="FontSize14"
+                x:TypeArguments="x:Double"
+                Android="14"
+                iOS="14" />
+            <x:OnPlatform
+                x:Key="FontSize16"
+                x:TypeArguments="x:Double"
+                Android="16"
+                iOS="16" />
+            <x:OnPlatform
+                x:Key="FontSize22"
+                x:TypeArguments="x:Double"
+                Android="22"
+                iOS="22" />-->
+            <Style x:Key="ConentPageStyle" TargetType="ContentPage">
+                <Setter Property="BackgroundColor" Value="{DynamicResource AppBackgroundColor}"></Setter>
+            </Style>
+            <Style x:Key="SmallCompanyNameLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
+                <Setter Property="FontSize" Value="10" />
+                <Setter Property="TextColor" Value="{DynamicResource labelTextColor}" />
+            </Style>
+
+            <Style x:Key="FormEntryLabel" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{DynamicResource labelEntryHeadingTextColor}" />
+                <!--<Setter Property="Margin" Value="0,8,0,5"/>-->
+
+            </Style>
+            <Style x:Key="FormEntryLabelSpan" TargetType="Span">
+                <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{DynamicResource labelEntryHeadingTextColor}" />
+
+
+
+            </Style>
+            <Style x:Key="EntryStack" TargetType="StackLayout">
+                <Setter Property="Margin" Value="0,5,0,5"/>
+
+
+
+            </Style>
+            <Style x:Key="AccordianGridLabelDropDown" TargetType="Grid">
+                <Setter Property="Margin" Value="0,5,0,5"/>
+
+
+
+            </Style>
+            <Style x:Key="AccordianEntryStack" TargetType="StackLayout">
+                <Setter Property="Margin" Value="0,10,0,0"/>
+
+            </Style>
+            <Style x:Key="AccordianStackEntry" TargetType="Grid">
+                <Setter Property="Margin" Value="0,5,0,5"/>
+            </Style>
+
+            <Style x:Key="DropIconBtton" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="TextColor" Value="{DynamicResource IconColor}" />
+
+                <Setter Property="Margin" Value="5,0,15,0"/>
+                <Setter Property="Text" Value="&#xf107;"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+
+
+            </Style>
+
+            <Style x:Key="ProfileArrowIconBtton" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="TextColor" Value="{DynamicResource IconColor}" />
+                <Setter Property="Rotation" Value="270"/>
+                <Setter Property="Margin" Value="0,0,5,0"/>
+                <Setter Property="Text" Value="&#xf107;"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+
+
+            </Style>
+            <Style x:Key="calendericon" TargetType="Image">
+
+                <Setter Property="Margin" Value="0,0,10,0"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="Source" Value="calender"></Setter>
+           
+
+            </Style>
+            <Style x:Key="calendar" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="TextColor" Value="{DynamicResource IconColor}" />
+                <Setter Property="Margin" Value="0,-37,10,0"/>
+                <Setter Property="Text" Value="&#xf073;"/>
+                <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+               
+
+            </Style>
+            <Style x:Key="trash" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="23" />
+                <Setter Property="TextColor" Value="{DynamicResource IconColor}" />
+                <Setter Property="Margin" Value="5,0,10,0"/>
+                <Setter Property="Text" Value="&#xf2ed;"/>
+                <Setter Property="HorizontalOptions" Value="Start"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+
+            </Style>
+            <Style x:Key="SearchIcon" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}"/>
+                <Setter Property="FontSize" Value="17"/>
+                <Setter Property="TextColor" Value="#92667085"/>
+                <Setter Property="Margin" Value="10,0,5,0"/>
+                <Setter Property="Text" Value="&#xf002;"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+
+            </Style>
+            <Style x:Key="plus" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="TextColor" Value="{DynamicResource labelTextColor}" />
+                <Setter Property="Padding" Value="15,0,15,0"/>
+                <Setter Property="Text" Value="&#x2b;"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+
+            </Style>
+            <Style x:Key="minus" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="TextColor" Value="{DynamicResource labelTextColor}" />
+                <Setter Property="Padding" Value="15,0,15,0"/>
+                <Setter Property="Text" Value="&#xf068;"/>
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+
+            </Style>
+
+
+            <Style x:Key="CrossIconButton" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="TextColor" Value="{DynamicResource labelTextColor}" />
+
+                <Setter Property="Margin" Value="5,0,15,0"/>
+                <Setter Property="Text" Value="&#10005;"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+
+            </Style>
+
+
+
+            <Style x:Key="CrossIconRedButton" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="TextColor" Value="{DynamicResource MandatoryRedColor}" />
+
+                <Setter Property="Margin" Value="5,0,5,0"/>
+                <Setter Property="Text" Value="&#10005;"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+
+            </Style>
+
+            <Style x:Key="CollectionViewStack" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="{DynamicResource whiteColor}"/>
+
+                <Setter Property="Margin" Value="0,0,0,0"/>
+          
+
+            </Style>
+            <Style x:Key="OrderListingStackConatiner" TargetType="StackLayout">
+                <Setter Property="Padding" Value="0,5,0,5"/>
+               
+            </Style>
+            <Style x:Key="OrderListingStack" TargetType="StackLayout">
+                <Setter Property="Margin" Value="0,0,0,0"/>
+
+            </Style>
+
+            <Style x:Key="FormEntryBorderContainer" TargetType="Border">
+                <Setter Property="Padding" Value="2" />
+
+                <Setter Property="Stroke" Value="{DynamicResource entryBorderColor }"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource Entrybackground}"  />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 8,8,8,8"/>
+            </Style>
+
+
+            <Style x:Key="BorderViewContainer2side" TargetType="Border">
+                <Setter Property="Margin" Value="0,0,0,0"  />
+                <Setter Property="Padding" Value="10,20,10,10"  />
+
+                <Setter Property="BackgroundColor" Value="{DynamicResource whiteColor}"  />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 40,40,0,0"/>
+            </Style>
+
+
+            <Style x:Key="FormEntryFrame" TargetType="Frame">
+                <Setter Property="CornerRadius" Value="8" />
+                <Setter Property="Padding" Value="2" />
+                <Setter Property="Margin" Value="5,5,10,0" />
+                <Setter Property="BorderColor" Value="{DynamicResource entryBorderColor}" />
+            </Style>
+            <Style x:Key="FormEntryBorder" TargetType="Border">
+
+                <Setter Property="Padding" Value="2" />
+                <Setter Property="Stroke" Value="{DynamicResource entryBorderColor}"  />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 8,8,8,8"/>
+                <Setter Property="Margin" Value="0,5,0,0" />
+            </Style>
+            <Style x:Key="FormEntrySearchBorder" TargetType="Border">
+
+                <Setter Property="Padding" Value="2" />
+                <Setter Property="Stroke" Value="{DynamicResource SearchBoxborder}"  />
+                <Setter Property="BackgroundColor" Value="{DynamicResource SearchBackground}"/>
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 8,8,8,8"/>
+                <Setter Property="Margin" Value="0,5,0,0" />
+            </Style>
+
+            <!--added by bhawna for otp page-->
+            <Style x:Key="FormEntryBorderOTPV" TargetType="Border">
+
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Stroke" Value="{DynamicResource entryBorderColor}"  />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 5,5,5,5"/>
+                <Setter Property="Margin" Value="8,0,8,0" />
+                <Setter Property="WidthRequest" Value="48" />
+                <Setter Property="BackgroundColor" Value="White"/>
+                <Setter Property="HeightRequest" Value="8" />
+            </Style>
+            <Style x:Key="FormEntryBorderSignUp" TargetType="Border">
+                <Setter Property="ZIndex" Value="100" />
+                <Setter Property="VerticalOptions" Value="End" />
+                <Setter Property="Stroke" Value="{DynamicResource entryBorderColor}"  />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 12,12,12,12"/>
+                <Setter Property="Margin" Value="20,0" />
+                <Setter Property="WidthRequest" Value="200" />
+                <Setter Property="HeightRequest" Value="40" />
+            </Style>
+            <Style x:Key="ListViewGrid" TargetType="Grid">
+                <Setter Property="Padding" Value=" 12,12,12,12" />
+                <!--<Setter Property="Margin" Value="15,10,15,0" />-->
+                <Setter Property="BackgroundColor" Value="Transparent"  />
+                <Setter Property="RowSpacing" Value="5"/>
+                <Setter Property="ColumnSpacing" Value="2"/>
+
+            </Style>
+            <Style x:Key="ProfileStackView" TargetType="StackLayout">
+                <Setter Property="Padding" Value=" 12,12,12,5" />
+                <!--<Setter Property="Margin" Value="15,10,15,0" />-->
+                <Setter Property="BackgroundColor" Value="Transparent"  />
+             
+
+            </Style>
+            <Style x:Key="BlueListViewGrid" TargetType="Grid">
+                <Setter Property="Padding" Value=" 12,8,12,8" />
+                <!--<Setter Property="Margin" Value="15,10,15,0" />-->
+                <Setter Property="BackgroundColor" Value="Transparent"  />
+                <Setter Property="RowSpacing" Value="0"/>
+                <Setter Property="ColumnSpacing" Value="10"/>
+
+            </Style>
+
+
+
+            <Style x:Key="ListviewFooterContainer" TargetType="Border">
+                <!--<Setter Property="Margin" Value="5"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 10,10,10,10"/>
+                <Setter Property="Padding" Value="2,0,2,2"/>
+                <Setter Property="Stroke" Value="hotpink"/>
+                <Setter Property="BackgroundColor" Value="HotPink"  />-->
+                <!--<Setter Property="Margin" Value="5"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+                <Setter Property="Padding" Value="1,1,2,1"/>
+                <Setter Property="Stroke" Value="{DynamicResource ListFooterStrokeColor}"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource ListFooterStrokeColor}"  />
+                <Setter Property="StrokeShape" Value="RoundRectangle 13,11,13,13"/>-->
+
+                <Setter Property="BackgroundColor" Value="{DynamicResource ListFooterStrokeColor}"  />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="Margin" Value="0,0,0,-1"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="Stroke" Value="{DynamicResource ListFooterStrokeColor}"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 0,0,10,10"/>
+            </Style>
+            <Style x:Key="ListviewFooter" TargetType="StackLayout">
+
+                <Setter Property="Padding" Value="14,10,14,10"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource ListViewFooterColor}"  />
+            </Style>
+            <Style x:Key="ListMoreInfoLabelStack" TargetType="StackLayout">
+                <Setter Property="Orientation" Value="Horizontal"/>
+                <Setter Property="HorizontalOptions" Value="EndAndExpand"/>
+
+
+            </Style>
+            <Style x:Key="statusLabel" TargetType="Label">
+
+                <Setter Property="TextColor" Value="{DynamicResource whiteColor}"/>
+                <Setter Property="FontSize" Value="{StaticResource FontSizeListLabel}"/>
+            </Style>
+            <Style x:Key="ListMoreInfoLabel" TargetType="Label">
+
+                <Setter Property="TextColor" Value="{DynamicResource MainColor}"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="FontFamily" Value="{StaticResource FontBold}" />
+                <Setter Property="Padding" Value="5,0,0,0"/>
+                <Setter Property="FontSize" Value="{StaticResource FontSizeListLabelValue}"/>
+
+            </Style>
+            <Style x:Key="bluecardSideLabelStack" TargetType="StackLayout">
+                <!--<Setter Property="Padding" Value="14, 12" />-->
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="WidthRequest" Value="30" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource ProductCardFlexColor}"  />
+               
+            </Style>
+            <Style x:Key="bluecardSideLabel" TargetType="Label">
+                
+                <Setter Property="FontSize" Value="13"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="TextColor" Value="{DynamicResource White}" />
+                <Setter Property="Rotation" Value="270"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                <Setter Property="FontAttributes" Value="Bold"/>
+                <Setter Property="HorizontalOptions" Value="Center"  />
+
+            </Style>
+            <Style x:Key="StatusGrid"  TargetType="Border">
+                <Setter Property="StrokeShape" Value="RoundRectangle 8,8,8,8"/>
+                <Setter Property="Padding" Value="10,1,10,2"/>
+                <Setter Property="StrokeThickness" Value="0"/>
+            </Style>
+            <Style x:Key="BorderFabButton"  TargetType="Border">
+                <Setter Property="StrokeShape" Value="RoundRectangle 40,40,40,40"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource mainColor}"  />
+                <Setter Property="Stroke" Value="{DynamicResource mainColor}"/>
+                <Setter Property="HeightRequest" Value="60"></Setter>
+                <Setter Property="WidthRequest" Value="60"></Setter>
+            </Style>
+            <Style x:Key="BorderFabDownButton"  TargetType="Border">
+                <Setter Property="StrokeShape" Value="RoundRectangle 40,40,40,40"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource mainColor}"  />
+                <Setter Property="Stroke" Value="{DynamicResource mainColor}"/>
+                <Setter Property="HeightRequest" Value="40"></Setter>
+                <Setter Property="WidthRequest" Value="40"></Setter>
+            </Style>
+            <Style x:Key="BorderViewContainer" TargetType="Border">
+                <!--<Setter Property="Padding" Value="14, 12" />-->
+                <Setter Property="Margin" Value="1,5,1,5" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource CardBackgroundColor}"  />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="Stroke" Value="{DynamicResource ListBorderColor}"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 10,10,10,10"/>
+            </Style>
+
+            <Style x:Key="BorderViewBlueContainer" TargetType="Border" >
+                <!--<Setter Property="Padding" Value="14, 12" />-->
+                <Setter Property="Margin" Value="1,5,1,5" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource FrameBackgroundWhiteColor}"  />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="Stroke" Value="{DynamicResource ListBorderColor}"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 10,10,10,10"/>
+            </Style>
+            <Style x:Key="BorderViewContainerForTab" TargetType="Border">
+                <Setter Property="Padding" Value="14, 12" />
+                <Setter Property="Margin" Value="1,5,1,5" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource CardBackgroundColor}"  />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="Stroke" Value="{DynamicResource ListBorderColor}"/>
+                <Setter Property="StrokeShape" Value="RoundRectangle 10,10,10,10"/>
+            </Style>
+
+            <Style x:Key="BorderViewContainerForProfile" TargetType="Border">
+                <Setter Property="Padding" Value="0" />
+                <Setter Property="Margin" Value="5,10,5,0" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource FrameBackColor}"  />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10,10,10,10"/>
+            </Style>
+            <Style x:Key="BorderViewPopup" TargetType="Border">
+                <Setter Property="Margin" Value="0,0,0,-2"  />
+                <Setter Property="Padding" Value="16"  />
+                <Setter Property="BackgroundColor" Value="{DynamicResource PopupBackgroundColor}"  />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 25,25,0,0"/>
+                <!--<Setter Property="HeightRequest" Value="400"/>-->
+            </Style>
+            <Style x:Key="FormEntry" TargetType="Entry">
+                <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+                <Setter Property="HeightRequest" Value="40"/>
+                <!--<Setter Property="InputTransparent" Value="True" />
+                <Setter Property="IsReadOnly" Value="True" />-->
+
+            </Style>
+            <Style x:Key="FormEntryDisabled" TargetType="Entry">
+                <Setter Property="InputTransparent" Value="True" />
+                <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+                <Setter Property="HeightRequest" Value="40"/>
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"
+/>
+            </Style>
+            <Style x:Key="FormEditorDisabled" TargetType="Editor">
+                <Setter Property="InputTransparent" Value="True" />
+                <Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+                <Setter Property="IsReadOnly" Value="True" />
+                <Setter Property="FontAutoScalingEnabled" Value="True" />
+                <Setter Property="AutoSize" Value="TextChanges" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="MinimumHeightRequest" Value="40"/>
+            </Style>
+            <Style x:Key="FormEntryText" TargetType="Entry">
+                <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                <Setter Property="TextColor" Value="{DynamicResource labelEntryValueTextColor}"/>
+                <Setter Property="Margin" Value="10,0,0,0" />
+                <Setter Property="HeightRequest" Value="40"/>
+
+
+            </Style>
+            <Style x:Key="Radiocheckbox" TargetType="RadioButton">
+                <Setter Property="FontFamily" Value="{StaticResource FontRegular}" />
+                <Setter Property="TextColor" Value="{DynamicResource labelEntryValueTextColor}"/>
+                <Setter Property="Margin" Value="0,0,0,0" />
+                <Setter Property="HeightRequest" Value="20"/>
+                <Setter Property="FontSize" Value="14"/>
+                <Setter Property="BorderColor" Value="#344054"/>
+
+
+            </Style>
+            <Style x:Key="FormEditor" TargetType="Editor">
+                <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+                <Setter Property="AutoSize" Value="TextChanges" />
+                <Setter Property="TextColor" Value="{DynamicResource labelEntryValueTextColor}"/>
+                <Setter Property="FontAutoScalingEnabled" Value="True" />
+            </Style>
+            <Style x:Key="RefreshViewStyle" TargetType="RefreshView">
+                <Setter Property="BackgroundColor" Value="Transparent" />
+                <Setter Property="RefreshColor" Value="{DynamicResource mainColor}" />
+            </Style>
+            <Style x:Key="HeaderLayout" TargetType="StackLayout">
+                <Setter Property="Padding" Value="15,25,15,10" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource mainColor}"/>
+            </Style>
+            <Style x:Key="SubHeaderLayout" TargetType="StackLayout">
+                <Setter Property="Padding" Value="0,0,0,3" />
+
+            </Style>
+            <Style x:Key="HeaderSecondaryLayout" TargetType="StackLayout">
+                <Setter Property="Padding" Value="15,7,15,10" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource SecondaryheaderColor}"/>
+            </Style>
+            <Style x:Key="HeaderMenuIcon" TargetType="ImageButton">
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Source" Value="menuicon.svg"/>
+            </Style>
+            <Style x:Key="HeaderBackIcon" TargetType="ImageButton">
+                <Setter Property="HorizontalOptions" Value="Start" />
+                <Setter Property="Source" Value="backwhite.svg"/>
+            </Style>
+            <Style x:Key="HeaderAddIcon" TargetType="ImageButton">
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="WidthRequest" Value="33"/>
+      
+                <Setter Property="HeightRequest" Value="23"/>
+                <Setter Property="Source" Value="add"/>
+                <Setter Property="Margin" Value="5,-2,1,0"/>
+            </Style>
+            <Style x:Key="HeaderFilterIcon" TargetType="ImageButton">
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="WidthRequest" Value="20"/>
+                <Setter Property="HeightRequest" Value="18"/>
+                <Setter Property="Source" Value="filter"/>
+                <Setter Property="Margin" Value="0,1,5,0"/>
+            </Style>
+            <Style x:Key="FabFilterIcon" TargetType="ImageButton">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="WidthRequest" Value="25"/>
+                <Setter Property="HeightRequest" Value="22"/>
+                <Setter Property="Source" Value="filter"/>
+
+            </Style>
+            <Style x:Key="FabDownIcon" TargetType="ImageButton">
+                <Setter Property="HorizontalOptions" Value="Center"/>
+                <Setter Property="WidthRequest" Value="25"/>
+                <Setter Property="HeightRequest" Value="22"/>
+                <Setter Property="Source" Value="downarrow"/>
+
+            </Style>
+            <Style x:Key="leftarrowbutton" TargetType="ImageButton">
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="WidthRequest" Value="12"/>
+                <Setter Property="HeightRequest" Value="9"/>
+                <Setter Property="Margin" Value="5,0,0,0"/>
+                <Setter Property="Source" Value="leftarrow"/>
+
+            </Style>
+
+            <Style x:Key="HeaderHeading" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand" />
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource FontBold}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{DynamicResource PageTitleColor}"/>
+            </Style>
+
+            <Style x:Key="ProfileHeaderHeading" TargetType="Label">
+                <Setter Property="HorizontalOptions" Value="StartAndExpand" />
+                <Setter Property="VerticalOptions" Value="Start"/>
+                <Setter Property="VerticalTextAlignment" Value="Start"></Setter>
+                <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="TextColor" Value="{DynamicResource mainColor}"/>
+            </Style>
+            <Style x:Key="HeaderHeadingSpan" TargetType="Span">
+                <!--<Setter Property="HorizontalOptions" Value="Center" />-->
+                <Setter Property="FontFamily" Value="{StaticResource FontBold}" />
+                <Setter Property="FontSize" Value="16" />
+                <Setter Property="TextColor" Value="{DynamicResource mainColor}" />
+                <!--<Setter Property="VerticalOptions" Value="CenterAndExpand"/>-->
+            </Style>
+            <Style x:Key="ProductHeaderHeading" TargetType="Label">
+                <!--<Setter Property="HorizontalOptions" Value="Center" />-->
+                <Setter Property="FontFamily" Value="{StaticResource FontBold}" />
+                <Setter Property="FontSize" Value="13" />
+                <Setter Property="TextColor" Value="{DynamicResource labelTextColor}" />
+                <!--<Setter Property="VerticalOptions" Value="CenterAndExpand"/>-->
+            </Style>
+            <Style x:Key="SubmitButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{DynamicResource mainColor}" />
+                <Setter Property="FontFamily" Value="{StaticResource FontBold}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Text" Value="Save"/>
+                <Setter Property="Margin" Value="5,15,5,15" />
+                <Setter Property="HorizontalOptions" Value="FillAndExpand" />
+                <Setter Property="VerticalOptions" Value="EndAndExpand" />
+            </Style>
+            <Style x:Key="FormSubmitBtnContainer" TargetType="StackLayout">
+                <Setter Property="Margin" Value="0,30,0,0"/>
+            </Style>
+            <Style x:Key="CancelButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="{DynamicResource mainColor}"  />
+                <Setter Property="FontFamily" Value="{StaticResource FontBold}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Text" Value="Cancel"/>
+            </Style>
+
+            <Style x:Key="SuccesPopUpButton" TargetType="Button">
+                <Setter Property="BackgroundColor" Value="#50FFFFFF"  />
+                <Setter Property="BorderColor" Value="{DynamicResource whiteColor}"  />
+                <Setter Property="BorderWidth" Value="1"  />
+                <Setter Property="FontFamily" Value="{StaticResource FontBold}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="WidthRequest" Value="110" />
+                <Setter Property="Margin" Value="0,10,0,0" />
+                <Setter Property="Text" Value="OK"/>
+                <Setter Property="TextColor" Value="{DynamicResource whiteColor}"/>
+            </Style>
+
+            <Style x:Key="DropIconBttonPayment" TargetType="Label">
+                <Setter Property="FontFamily" Value="{StaticResource FontAwesomeSolid}" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="TextColor" Value="{DynamicResource labelTextColor}" />
+                <Setter Property="Margin" Value="5,0,15,0"/>
+                <Setter Property="Text" Value="&#xf107;"/>
+                <Setter Property="HorizontalOptions" Value="End"/>
+                <Setter Property="VerticalOptions" Value="CenterAndExpand"/>
+
+            </Style>
+
+
+            <Style x:Key="ContainerGrid" TargetType="Grid">
+                <Setter Property="Margin" Value="15,15,15,0" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand"></Setter>
+                <Setter Property="RowSpacing" Value="0"></Setter>
+                <Setter Property="ColumnSpacing" Value="0"></Setter>
+            </Style>
+            
+            <Style x:Key="ContainerscrollView" TargetType="ScrollView">
+                <Setter Property="Margin" Value="15,15,15,0" />
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalScrollBarVisibility" Value="Never"/>
+
+            </Style>
+            <Style x:Key="ContainerStacklView" TargetType="StackLayout">
+                <Setter Property="Margin" Value="15,15,15,0" />
+
+
+            </Style>
+            <Style x:Key="ContainerStackView" TargetType="StackLayout">
+                <Setter Property="Margin" Value="15,15,15,0" />
+
+
+            </Style>
+            <Style x:Key="CompositeBlueStack" TargetType="StackLayout">
+                <Setter Property="Padding" Value="16,0,16,16"></Setter>
+                <Setter Property="BackgroundColor" Value="{DynamicResource MainColor}"/>
+                
+
+            </Style>
+            
+            <Style x:Key="DetailStackLayoutContainer" TargetType="StackLayout">
+                <Setter Property="Margin" Value="0,10,0,10" />
+                <Setter Property="VerticalOptions" Value="Center" />
+            </Style>
+
+              <Style x:Key="ViewCellStack" TargetType="StackLayout">
+                <Setter Property="BackgroundColor" Value="{DynamicResource whiteColor}" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+
+            </Style>
+            <Style x:Key="ListHeading" TargetType="Label">
+                <Setter Property="FontFamily" Value="OpenSans-Regular.ttf#OpenSans" />
+                <Setter Property="FontSize" Value="15" />
+                <Setter Property="VerticalOptions" Value="CenterAndExpand" />
+                <Setter Property="HorizontalOptions" Value="CenterAndExpand"/>
+                <Setter Property="TextColor" Value="{DynamicResource whiteColor}"/>
+            </Style>
+
+            <Style x:Key="DashboardPerformanceContainer" TargetType="Border">
+                <Setter Property="Padding" Value="14, 12" />
+                <Setter Property="Margin" Value="0,20,0,0" />
+                <Setter Property="BackgroundColor" Value="#0051AC"  />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10,10,10,10"/>
+            </Style>
+
+            <Style x:Key="DashboardAnalysisContainer" TargetType="Border">
+                <Setter Property="Padding" Value="15,4,10,0" />
+                <Setter Property="Margin" Value="0,20,0,0" />
+                <Setter Property="BackgroundColor" Value="#344054"  />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10,10,10,10"/>
+            </Style>
+
+            <Style x:Key="DashboardOutstandingContainer" TargetType="Border">
+                <Setter Property="Padding" Value="12, 10" />
+                <Setter Property="Margin" Value="0,20,0,0" />
+                <Setter Property="BackgroundColor" Value="#101828"  />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 10,10,10,10"/>
+            </Style>
+
+            <Style x:Key="LegendBoxPerformance" TargetType="Border">
+                <Setter Property="HeightRequest" Value="15" />
+                <Setter Property="WidthRequest" Value="18" />
+                <Setter Property="StrokeThickness" Value="0" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 4,4,4,4"/>
+                <Setter Property="Margin" Value="0,0,6,0" />
+            </Style>
+
+            <Style x:Key="Popupheading" TargetType="Label">
+
+                <Setter Property="FontFamily" Value="OpenSans-Semibold.ttf#OpenSans" />
+                <Setter Property="FontSize" Value="{StaticResource StatsCaptionFontSize}" />
+                <Setter Property="TextColor" Value="{DynamicResource mainColor}"/>
+            </Style>
+            <Style x:Key="PopupSubheading" TargetType="Label">
+                <Setter Property="FontFamily" Value="OpenSans-Regular.ttf#OpenSans" />
+                <Setter Property="FontSize" Value="{StaticResource SmallFontSizeListLabel}" />
+                <Setter Property="TextColor" Value="{DynamicResource labelValue}"/>
+
+            </Style>
+            <Style x:Key="PopupcloseButton" TargetType="ImageButton">
+                
+                <Setter Property="HeightRequest" Value="28" />
+                <Setter Property="Padding" Value="4" />
+                <Setter Property="WidthRequest" Value="50"/>
+                <Setter Property="Source" Value="cross"/>
+                <Setter Property="Margin" Value="0,0,0,0"/>
+
+            </Style>
+            <Style x:Key="CollectionViewListLabel" TargetType="Label">
+                <Setter Property="HeightRequest" Value="38" />
+                <Setter Property="BackgroundColor" Value="{DynamicResource whiteColor}"/>
+                <Setter Property="FontFamily" Value="OpenSans-Regular.ttf#OpenSans"/>
+                <Setter Property="TextColor" Value="{DynamicResource MainColor}"/>
+                <Setter Property="HorizontalTextAlignment" Value="Start"/>
+                <Setter Property="FontSize" Value="15"/>
+                <Setter Property="LineBreakMode" Value="WordWrap"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+            
+            </Style>
+            <Style x:Key="DividerLine" TargetType="Line">
+
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource LineColor}"/>
+            </Style>
+
+            <Style x:Key="CollectionviewSeperatorLine" TargetType="Line">
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+                <Setter Property="BackgroundColor" Value="{DynamicResource LineColor}"/>
+            </Style>
+            <Style x:Key="Popupheader" TargetType="Grid">
+
+                <Setter Property="Margin" Value="{OnPlatform iOS='15,0,0,15', Android='0,0,0,15'}"/>
+               
+              
+            </Style>
+
+            <Style x:Key="Datpickerstyle" TargetType="DatePicker">
+                <Setter Property="FontFamily" Value="{StaticResource FontSemiBold}" />
+                <Setter Property="Margin" Value="10,0,0,0" />
+                <Setter Property="HeightRequest" Value="{OnPlatform iOS='35', Android='40'}"/>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+                <Setter Property="VerticalOptions" Value="FillAndExpand"/>
+            </Style>
+            <Style x:Key="LineLabel" TargetType="StackLayout">
+                
+                <Setter Property="Margin" Value="0,20,0,15" />
+            </Style>
+            <Style x:Key="DropDownContainerStack" TargetType="StackLayout">
+
+                <Setter Property="Margin" Value="0" />
+                <Setter Property="VerticalOptions" Value="EndAndExpand"></Setter>
+                <Setter Property="HorizontalOptions" Value="FillAndExpand"/>
+            </Style>
+            <Style x:Key="PopupListLabel" TargetType="Label">
+
+                <Setter Property="FontFamily" Value="OpenSans-Regular.ttf#OpenSans" />
+                <Setter Property="TextColor" Value="{DynamicResource mainColor}"></Setter>
+                <Setter Property="HorizontalTextAlignment" Value="Center"/>
+                <Setter Property="HorizontalOptions" Value="StartAndExpand"/>
+                <Setter Property="FontSize" Value="16"/>
+                <Setter Property="VerticalOptions" Value="Center"/>
+                <Setter Property="BackgroundColor" Value="Transparent"/>
+                <Setter Property="VerticalTextAlignment" Value="Center"/>
+                 <Setter Property="Margin" Value="0,0,0,0" />
+
+               
+            </Style>
+
+            <Style x:Key="ProductPopupStyle" TargetType="StackLayout">
+                <Setter Property="HorizontalOptions" Value="Center" />
+                <Setter Property="Margin" Value="0, 10, 0, 10" />
+            </Style>
+
+
+            <Style x:Key="ProfileHeading" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource MainBlueBaseColor}" />
+                <Setter Property="FontSize" Value="14" />
+                <Setter Property="Margin" Value="0, 0, 5, 0" />
+            </Style>
+
+            <Style x:Key="ProfileSubHeading" TargetType="Label">
+                <Setter Property="TextColor" Value="{DynamicResource HeadingLightGrey }" />
+                <Setter Property="FontSize" Value="12" />
+                <Setter Property="Margin" Value="0, 2, 0, 0" />
+            </Style>
+
+            <Style x:Key="ProfileImageBorder" TargetType="Border">
+                <Setter Property="HeightRequest" Value="60" />
+                <Setter Property="WidthRequest" Value="60" />
+                <Setter Property="StrokeThickness" Value="1" />
+                <Setter Property="StrokeShape" Value="RoundRectangle 40,40,40,40"/>
+            </Style>
+
+        </ResourceDictionary>
+    </Application.Resources>
+   
+    
+   
+   
+
+</Application>
